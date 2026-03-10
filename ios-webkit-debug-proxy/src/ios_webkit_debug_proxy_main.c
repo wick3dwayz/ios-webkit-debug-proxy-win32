@@ -34,7 +34,7 @@ struct iwdpm_struct {
 typedef struct iwdpm_struct *iwdpm_t;
 #ifdef WIN32
 iwdpm_t iwdpm_new() {
-  return (iwdpm_t) calloc(sizeof(struct iwdpm_struct), 1);
+  return (iwdpm_t) calloc(1, sizeof(struct iwdpm_struct));
 }
 #else
 iwdpm_t iwdpm_new();
@@ -189,7 +189,8 @@ void iwdpm_free(iwdpm_t self) {
   }
 }
 
-iwdpm_t iwdpm_new(int argc, char **argv, int *to_exit) {
+#ifndef WIN32
+iwdpm_t iwdpm_new() {
   iwdpm_t self = (iwdpm_t)malloc(sizeof(struct iwdpm_struct));
   if (!self) {
     return NULL;
@@ -197,6 +198,7 @@ iwdpm_t iwdpm_new(int argc, char **argv, int *to_exit) {
   memset(self, 0, sizeof(struct iwdpm_struct));
   return self;
 }
+#endif
 
 int iwdpm_configure(iwdpm_t self, int argc, char **argv) {
 

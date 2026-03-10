@@ -600,7 +600,7 @@ sm_private_t sm_private_new(size_t buf_length) {
   my->tmp_fail_fds = (fd_set *)malloc(SIZEOF_FD_SET);
   my->fd_to_value = ht_new(HT_INT_KEYS);
   my->fd_to_sendq = ht_new(HT_INT_KEYS);
-  my->tmp_buf = (char *)calloc(buf_length, sizeof(char *));
+  my->tmp_buf = (char *)calloc(buf_length, sizeof(char));
   if (!my->tmp_buf || !my->all_fds || !my->server_fds ||
       !my->send_fds || !my->recv_fds ||
       !my->tmp_send_fds || !my->tmp_recv_fds || !my->tmp_fail_fds ||
